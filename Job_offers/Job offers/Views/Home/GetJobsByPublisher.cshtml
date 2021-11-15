@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Job_offers.Models.AppliedJobViewModel>
+
+@{
+    ViewBag.Title = "GetJobsByPublisher";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>المتقدمين للوظائف المضافة سابقاً</h2>
+
+@foreach (var gr in Model)
+{
+    <h3>@gr.JobName</h3>
+    <table class="table table-bordered table-hover table-striped">
+        <tr>
+            <th>
+                اسم المتقدم
+            </th>
+            <th>
+                نص الرسالة
+            </th>
+            <th>
+                تاريخ التقدم
+            </th>
+        </tr>
+        @foreach (var item in gr.Items)
+        {
+            <tr>
+                <td>
+                    @item.user.UserName
+                </td>
+                <td>
+                    @item.Message
+                </td>
+                <td>
+                    @item.ApplyDate
+                </td>
+            </tr>
+        }
+    </table>
+}

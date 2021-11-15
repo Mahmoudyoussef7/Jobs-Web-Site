@@ -1,0 +1,41 @@
+﻿@model ICollection<Job_offers.Models.Category>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron alert-info">
+    <h3>ابحث عن وظيفتك </h3>
+    <p class="lead">ابحث عن وظيفتك من خلال موقعنا من خلال جميع انواع الوظائف لمختلف التخصصات ,وأيضاً يمكن نشر وظائف إذا كنت تبحث عن موظفين لشركتك الخاصة </p>
+    <p><a href="https://asp.net" class="btn btn-primary btn-lg">المزيد من التفاصيل &raquo;</a></p>
+</div>
+<br />
+@foreach (var item in Model)
+{
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h1>@Html.DisplayFor(m => item.CategoryName)</h1>
+    </div>
+    <div class="row panel-body">
+        <h4>@Html.DisplayFor(m => item.CategoryDescription)</h4>
+
+        @foreach (var job in item.Jobs)
+        {
+            <div class="col-md-4">
+                <div class="panel panel-default" style="margin:0.5rem">
+
+                    <div class="panel-heading text-center">
+                        <h3>@Html.DisplayFor(m => job.JobName)</h3>
+                    </div>
+                    <div class="panel-body">
+                        <img src="~/UploadFiles/Images/@job.JobImage" class="thumbnail" width="100%" height="180" />
+                        <h4>@Html.DisplayFor(m => job.JobDescription)</h4>
+                        <div class="panel-footer">
+                            @Html.ActionLink("التفاصيل", "JobDetails", new { jobId = job.ID }, new { @class = "btn btn-info btn-lg btn-block" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+}
